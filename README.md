@@ -2,7 +2,7 @@
 
 ## Project description 
 A P.O.C. to create a small blockchain in Python.
-For more information:
+For more information:   
 - [Business Requirements](project_docs/BR.md)
 - [Technical description](project_docs/TD.md)
 
