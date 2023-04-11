@@ -5,20 +5,20 @@ import json
 
 # Consts
 DIFFICULTY_LEVEL = 5
-DIFFICULTY_TOKEN = '0'*DIFFICULTY_LEVEL
+DIFFICULTY_TOKEN = "0" * DIFFICULTY_LEVEL
 
 
 class Blockchain:
     def __init__(self):
         self.chain = []
-        self.create_block(proof=1, previous_hash='0')
+        self.create_block(proof=1, previous_hash="0")
 
     def create_block(self, proof, previous_hash) -> dict:
         block = {
-            'index': len(self.chain) + 1,
-            'timestamp': str(datetime.datetime.now()),
-            'proof': proof,
-            'previous_hash': previous_hash,
+            "index": len(self.chain) + 1,
+            "timestamp": str(datetime.datetime.now()),
+            "proof": proof,
+            "previous_hash": previous_hash,
         }
         self.chain.append(block)
 
@@ -53,17 +53,17 @@ class Blockchain:
 
         while block_index < len(chain):
             block = chain[block_index]
-            if block['previous_hash'] != self.hash(previous_block):
+            if block["previous_hash"] != self.hash(previous_block):
                 return False
 
-            previous_proof = previous_block['proof']
-            proof = block['proof']
+            previous_proof = previous_block["proof"]
+            proof = block["proof"]
             hash_operation = hashlib.sha256(
-                str(proof**2 -  previous_proof**2).encode()
+                str(proof**2 - previous_proof**2).encode()
             ).hexdigest()
 
             if hash_operation[:DIFFICULTY_LEVEL] != DIFFICULTY_TOKEN:
-                return  False
+                return False
             previous_block = block
             block_index += 1
 
@@ -71,32 +71,28 @@ class Blockchain:
 def mine_block(blockchain):
     # Mining a new block
     previous_block = blockchain.get_previous_block()
-    previous_proof = previous_block['proof']
+    previous_proof = previous_block["proof"]
     proof = blockchain.proof_of_work(previous_proof)
     previous_hash = blockchain.hash(previous_block)
     block = blockchain.create_block(proof, previous_hash)
 
-    response = {'message': 'A block is MINED',
-                'index': block['index'],
-                'timestamp': block['timestamp'],
-                'proof': block['proof'],
-                'previous_hash': block['previous_hash']}
+    response = {
+        "message": "A block is MINED",
+        "index": block["index"],
+        "timestamp": block["timestamp"],
+        "proof": block["proof"],
+        "previous_hash": block["previous_hash"],
+    }
 
     return response
 
 
 def main():
-    """ Entry point """
+    """Entry point"""
     blockchain = Blockchain()
     result = mine_block(blockchain)
     print(json.dumps(blockchain.chain, indent=4))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
-
-
-
-
-
