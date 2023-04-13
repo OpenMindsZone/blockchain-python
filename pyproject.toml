@@ -1,16 +1,19 @@
 [tool.poetry]
-name = "blockchain_python"
+name = "blockchain-python"
 version = "0.1.0"
-description = ""
-authors = ["RTavares - OpenMinds  <openmindszone@protonmail.com>"]
+description = "Simple blockchain in Python - P.O.C."
+authors = ["RTavares - OpenMinds <openmindszone@protonmail.com>"]
+readme = "README.md"
+packages = [{include = "blockchain_python"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 mypy = "^1.2.0"
 
-[tool.poetry.dev-dependencies]
+
+[tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
