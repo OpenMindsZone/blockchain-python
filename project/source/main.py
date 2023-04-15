@@ -11,12 +11,17 @@ DIFFICULTY_TOKEN = "0" * DIFFICULTY_LEVEL
 class Blockchain:
     def __init__(self):
         self.chain = []
-        self.create_block(proof=1, previous_hash="0")
+        self.create_block(proof=1, previous_hash=None)
 
     def create_block(self, proof, previous_hash) -> dict:
         block = {
             "index": len(self.chain) + 1,
             "timestamp": str(datetime.datetime.now()),
+            "data": {
+                "data_file_one": None,
+                "data_file_two": None,
+                "data_file_three": None,
+            },
             "proof": proof,
             "previous_hash": previous_hash,
         }
