@@ -22,6 +22,9 @@ Paraphrasing [Sir Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton), "to
 So, the backbone of this P.O.C. was inspired by:
 - Geeks for Geeks - [Create simple Blockchain using Python](https://www.geeksforgeeks.org/create-simple-blockchain-using-python/).
 - Educative.io - [How to create a simple blockchain with Python](https://www.educative.io/answers/how-to-create-a-simple-blockchain-with-python).
+- Simply Explained - Xavier - [Youtube](https://www.youtube.com/@simplyexplained/videos)
+  - [Creating a blockchain with Javascript (Blockchain, part 1)](https://youtu.be/zVqczFZr124)
 - 
+
 
 -----
