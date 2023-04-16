@@ -19,6 +19,9 @@ Why is it paramount to use a virtual environment manager in Python?
 
 ## Source
 Paraphrasing [Sir Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton), "to be able to see further, we have to [stand on the shoulders of the giants](https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants)".  
-So, the backbone of this P.O.C. was inspired by [this nice article](https://www.geeksforgeeks.org/create-simple-blockchain-using-python/) at GeeksForGeeks site.
+So, the backbone of this P.O.C. was inspired by:
+- Geeks for Geeks - [Create simple Blockchain using Python](https://www.geeksforgeeks.org/create-simple-blockchain-using-python/).
+- Educative.io - [How to create a simple blockchain with Python](https://www.educative.io/answers/how-to-create-a-simple-blockchain-with-python).
+- 
 
 -----
