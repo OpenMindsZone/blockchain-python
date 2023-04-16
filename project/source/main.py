@@ -9,8 +9,7 @@ DIFFICULTY_TOKEN = "0" * DIFFICULTY_LEVEL
 
 
 class Block:
-    def __init__(self, index, block_data=None, previous_hash=None):
-        self.index = index
+    def __init__(self, block_data=None, previous_hash=None):
         self.timestamp = str(datetime.datetime.now())
         self.block_data = block_data
         self.previous_hash = previous_hash
@@ -21,7 +20,7 @@ class Block:
     def calculate_hash(self):
         return str(
             hashlib.sha256(
-                f"{self.index}{str(self.timestamp)}{self.previous_hash}{json.dumps(self.block_data)}{self.nonce}".encode()
+                f"{str(self.timestamp)}{self.previous_hash}{json.dumps(self.block_data)}{self.nonce}".encode()
             ).hexdigest()
         )
 
@@ -39,7 +38,6 @@ class Blockchain:
 
     def create_genesis_block(self):
         return Block(
-            index=0,
             block_data={"data": "Genesis block"},
             previous_hash=0,
         )
@@ -51,7 +49,6 @@ class Blockchain:
         latest_block = self.get_latest_block()
 
         block = Block(
-            index=latest_block.index + 1,
             block_data=data,
             previous_hash=latest_block.hash,
         )
