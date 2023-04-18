@@ -6,12 +6,20 @@ import json
 # Consts
 DIFFICULTY_LEVEL = 3
 DIFFICULTY_TOKEN = "0" * DIFFICULTY_LEVEL
+MINING_REWARD = 100  # Tokens
+INTERNAL_FROM_ADDRESS = 'Network'
+
+class Transaction:
+    def __init__(self, from_address, to_address, amount):
+        self.from_address = from_address
+        self.to_address = to_address
+        self.amount = amount
 
 
 class Block:
-    def __init__(self, block_data=None, previous_hash=None):
+    def __init__(self, transactions=None, previous_hash=None):
         self.timestamp = str(datetime.datetime.now())
-        self.block_data = block_data
+        self.transactions = transactions
         self.previous_hash = previous_hash
         self.nonce = 0
         self.hash = self.calculate_hash()
@@ -20,7 +28,7 @@ class Block:
     def calculate_hash(self):
         return str(
             hashlib.sha256(
-                f"{str(self.timestamp)}{self.previous_hash}{json.dumps(self.block_data)}{self.nonce}".encode()
+                f"{str(self.timestamp)}{self.previous_hash}{json.dumps(self.transactions)}{self.nonce}".encode()
             ).hexdigest()
         )
 
@@ -34,11 +42,11 @@ class Block:
 class Blockchain:
     def __init__(self):
         self.chain = [self.create_genesis_block()]
-        # self.create_block(proof=1, previous_hash=None)
+        self.pending_transactions = []
 
     def create_genesis_block(self):
         return Block(
-            block_data={"data": "Genesis block"},
+            transactions={"data": "Genesis block"},
             previous_hash=0,
         )
 
@@ -46,14 +54,32 @@ class Blockchain:
         return self.chain[-1]
 
     def add_block(self, data=None) -> None:
+        # TBR - RT
         latest_block = self.get_latest_block()
 
         block = Block(
-            block_data=data,
+            transactions=data,
             previous_hash=latest_block.hash,
         )
 
         self.chain.append(block)
+
+    def mine_pending_transactions(self, mining_reward_address):
+        latest_block = self.get_latest_block()
+
+        block = Block(
+            # In real world we should not mine all of the pending transactions at one
+            transactions=self.pending_transactions,
+            previous_hash=latest_block.hash,
+        )
+
+        block.mine_block()
+        self.chain.append(block)
+        # Reset pending transactions and add the mining reward for the miner.
+        self.pending_transactions = [
+            Transaction(INTERNAL_FROM_ADDRESS, mining_reward_address, MINING_REWARD),
+        ]
+
 
     def get_previous_block(self):
         return self.chain[-1]
